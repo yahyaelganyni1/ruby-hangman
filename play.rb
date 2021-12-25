@@ -1,10 +1,8 @@
 class Hangman
 
   def initialize
-    @letters = ('a'..'z').to_a
     @word = words.sample
     @lives = 7
-    @correct_guesses = []
     @word_teaser = ""
 
     @word.first.size.times do
@@ -42,22 +40,19 @@ class Hangman
     if @lives > 0
       puts "Enter a letter: "
       guess = gets.chomp
-      # if letter is not part of the world then remove from letters array 
       good_guess = @word.first.include? guess
 
       if guess == "exit"
         puts "thank you for playing"
-      
       elsif good_guess
         puts "You are correct"
 
-        @correct_guesses << guess
-
-        #remove correct letter from the alphabet
-        @letters.delete guess
-
         print_teaser guess
-        make_guess
+          if @word.first == @word_teaser.split.join
+            puts "CONGRATS you have won this round!"
+          else
+            make_guess
+          end
       else
         puts "Sorry...try again"
         @lives -= 1
