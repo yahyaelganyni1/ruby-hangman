@@ -45,7 +45,10 @@ class Hangman
       # if letter is not part of the world then remove from letters array 
       good_guess = @word.first.include? guess
 
-      if good_guess
+      if guess == "exit"
+        puts "thank you for playing"
+      
+      elsif good_guess
         puts "You are correct"
 
         @correct_guesses << guess
@@ -69,6 +72,7 @@ class Hangman
   def begin
     #ask user for letter
     puts "New game started... your word is #{@word.first.size} chracters long"
+    puts "to exit the game at any time type 'exit'"
     print_teaser
     puts "Clue: #{ @word.last }"
     make_guess
