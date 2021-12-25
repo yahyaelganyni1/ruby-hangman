@@ -15,13 +15,35 @@ class Hangman
   ]
   end
 
+  def print_teaser
+    word_teaser = ""
+
+    @word.first.size.times do
+    word_teaser += "_ "
+    end
+
+    puts word_teaser
+  end
+
+  def make_guess
+    puts "Enter a letter: "
+    guess = gets.chomp
+    # if letter is not part of the world then remove from letters array 
+    good_guess = @word.first.include? guess
+
+    if good_guess
+      puts "Good guess!"
+    else
+      puts "Sorry...try again"
+    end
+  end
+
   def begin
     #ask user for letter
     puts "New game started... your word is #{@word.first.size} chracters long"
-    puts "your clue is: #{ @word.last }"
-    puts "Enter a letter: "
-    guess = gets.chomp
-    puts "you guessed #{guess}"
+    print_teaser
+    puts "Clue: #{ @word.last }"
+    make_guess
   end
 end
 
